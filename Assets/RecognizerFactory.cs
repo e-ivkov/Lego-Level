@@ -2,15 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RecognitionFactory : MonoBehaviour {
+public abstract class RecognizerFactory<T> 
+{
+	protected abstract IRecognizer<T> MakeRecognizer ();
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+	public IRecognizer<T> GetObject()
+	{
+		return this.MakeRecognizer ();
 	}
 }

@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
+using UnityEngine;
 
-namespace AssemblyCSharp
+public interface IRecognizer<T>
 {
-	public interface EmptyInterface
-	{
-	}
+	List<Item<T>> Recognize(Texture2D image);
 }
+
 
