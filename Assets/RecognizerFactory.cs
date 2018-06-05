@@ -4,9 +4,9 @@ using UnityEngine;
 
 public abstract class RecognizerFactory<T> 
 {
-	protected abstract IRecognizer<T> MakeRecognizer ();
+	protected abstract IRecognizer MakeRecognizer ();
 
-	public IRecognizer<T> GetObject()
+	public IRecognizer GetObject()
 	{
 		return this.MakeRecognizer ();
 	}

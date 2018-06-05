@@ -5,7 +5,7 @@ using UnityEngine;
 public class LegoBlocksRecognizer : MonoBehaviour {
 
 	public Texture2D legoBlocks;
-	public List<Color> colors; 
+	public List<Color> colors;
 
 	// Use this for initialization
 	void Start () {

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IRecognizer<T>
+public interface IRecognizer
 {
-	List<Item<T>> Recognize(Texture2D image);
+	List<RecognizedItem> Recognize(Texture2D image);
 }
 
 
