@@ -3,24 +3,21 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 
-public class GridRecognizerFactory: RecognizerFactory<Color>
+public class GridRecognizerFactory: RecognizerFactory
 {
-	public Vector2Int GridNumber { get; private set; }
+	Vector2Int GridNumber;
 
-	public List<Color> GridColors { 
-		get;
-		private set;
-	}
+	Dictionary<Color, string> ColorBlockNames; 
 
-	public GridRecognizerFactory (Vector2Int gridNumber, List<Color> gridColors)
+	public GridRecognizerFactory (Vector2Int gridNumber, Dictionary<Color, string> colorBlockNames)
 	{
 		GridNumber = gridNumber;
-		GridColors = gridColors;
+		ColorBlockNames = colorBlockNames;
 	}
 
-	protected override IRecognizer<Color> MakeRecognizer ()
+	protected override IRecognizer MakeRecognizer ()
 	{
-		return new GridRecognizer (GridNumber, GridColors);
+		return new GridRecognizer (GridNumber, ColorBlockNames);
 	}
 }
 

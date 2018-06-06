@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class RecognizerFactory<T> 
+public abstract class RecognizerFactory
 {
 	protected abstract IRecognizer MakeRecognizer ();
 

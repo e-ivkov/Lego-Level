@@ -2,19 +2,12 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class RecognizedItem: ICloneable
+public struct RecognizedItem
 {
-	public Vector2 Position 
-	{
-		private set;
-		get;
-	}
+	public Vector2 Position;
 
-	public string Name 
-	{
-		private set;
-		get;
-	}
+	public string Name;
+
 
 	public RecognizedItem (Vector2 position, string name)
 	{
@@ -34,7 +27,9 @@ public class RecognizedItem: ICloneable
 
 	public override bool Equals (object obj)
 	{
-		return ((RecognizedItem)obj).Position.Equals (Position) && ((RecognizedItem)obj).Name.Equals (Name);
+		if(obj is RecognizedItem)
+			return ((RecognizedItem)obj).Position.Equals (Position) && ((RecognizedItem)obj).Name.Equals (Name);
+		return false;
 	}
 }
 

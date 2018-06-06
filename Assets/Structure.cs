@@ -3,29 +3,19 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 
-public class Structure
+public struct Structure
 {
-	public int Priority { get; private set; }
+	public int Priority;
 
-	private List<Item<Color>> _blocks;
+	public List<RecognizedItem> Blocks;
 
-	public List<Item<Color>> Blocks { 
-		get { 
-			return Extensions.Clone (_blocks).ToList(); 
-		}
-		private set {
-			_blocks = Extensions.Clone (value).ToList();
-		}
-	}
-	public string Name { get; private set; }
-	public GameObject Model { get; private set; }
+	public string Name;
 
-	public Structure (int priority, List<Item<Color>> blocks, string name, GameObject model)
+	public Structure (int priority, List<RecognizedItem> blocks, string name)
 	{
 		Priority = priority;
 		Blocks = blocks;
 		Name = name;
-		Model = model;
 	}
 }
 
