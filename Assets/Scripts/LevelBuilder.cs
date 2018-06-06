@@ -45,7 +45,10 @@ public class LevelBuilder : MonoBehaviour
 
         var factory = new StructureRecognizerFactory(Structures, new GridRecognizerFactory(GridNumber, colorBlockNames));
         foreach (RecognizedItem item in factory.GetObject().Recognize(LegoBlocks))
-            Instantiate(namedPrefabs[item.Name], new Vector3(item.Position.x, 0, item.Position.y), Quaternion.identity);
+        {
+            Vector3 size = namedPrefabs[item.Name].GetComponent<BoxCollider>().bounds.size;
+            Instantiate(namedPrefabs[item.Name], new Vector3(item.Position.x + size.x/2, size.y/2, item.Position.y + size.z/2), Quaternion.identity);
+        }
 
     }
 
