@@ -206,7 +206,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff6d98a6c71c64ba1bfa6d06e1241acc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  legoBlocks: {fileID: 2800000, guid: 1dcabc7fd611349dfad346a574561966, type: 3}
+  Structures:
+  - Priority: 0
+    Blocks:
+    - Position: {x: 0, y: 0}
+      Name: wallBlock
+    Name: wall
+  LegoBlocks: {fileID: 2800000, guid: 1dcabc7fd611349dfad346a574561966, type: 3}
+  ColorBlockNames:
+  - Color: {r: 0.30980393, g: 0.2901961, b: 0.30588236, a: 0}
+    Name: wallBlock
+  - Color: {r: 1, g: 1, b: 0.9686275, a: 0}
+    Name: white
+  NamedPrefabs:
+  - Name: wall
+    gameObject: {fileID: 1160830198687082, guid: 73a9f7a4eccb547f19696fdda9058f19,
+      type: 2}
+  GridNumber: {x: 4, y: 3}
 --- !u!1 &1877481359
 GameObject:
   m_ObjectHideFlags: 0

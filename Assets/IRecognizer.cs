@@ -4,7 +4,7 @@ using UnityEngine;
 
 public interface IRecognizer
 {
-	List<RecognizedItem> Recognize(Texture2D image);
+    List<RecognizedItem> Recognize(Texture2D image);
 }
 
 

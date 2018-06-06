@@ -4,10 +4,10 @@ using UnityEngine;
 
 public abstract class RecognizerFactory
 {
-	protected abstract IRecognizer MakeRecognizer ();
+    protected abstract IRecognizer MakeRecognizer();
 
-	public IRecognizer GetObject()
-	{
-		return this.MakeRecognizer ();
-	}
+    public IRecognizer GetObject()
+    {
+        return this.MakeRecognizer();
+    }
 }

@@ -1,21 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 
-public class StructureRecognizerFactory: RecognizerFactory
+public class StructureRecognizerFactory : RecognizerFactory
 {
-	RecognizerFactory Factory;
+    RecognizerFactory Factory;
 
-	List<Structure> Structures;
+    List<Structure> Structures;
 
-	public StructureRecognizerFactory (List<Structure> structures, RecognizerFactory blockFactory)
-	{
-		Structures = structures;
-		Factory = blockFactory;
-	}
+    public StructureRecognizerFactory(List<Structure> structures, RecognizerFactory blockFactory)
+    {
+        Structures = structures;
+        Factory = blockFactory;
+    }
 
-	protected override IRecognizer MakeRecognizer ()
-	{
-		return new StructureRecognizer (Structures, Factory);
-	}
+    protected override IRecognizer MakeRecognizer()
+    {
+        return new StructureRecognizer(Structures, Factory);
+    }
 }
 
