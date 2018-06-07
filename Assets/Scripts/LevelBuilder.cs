@@ -44,10 +44,11 @@ public class LevelBuilder : MonoBehaviour
             namedPrefabs.Add(namedPrefab.Name, namedPrefab.gameObject);
 
         var factory = new StructureRecognizerFactory(Structures, new GridRecognizerFactory(GridNumber, colorBlockNames));
-        foreach (RecognizedItem item in factory.GetObject().Recognize(LegoBlocks))
+        foreach (var item in factory.GetObject().Recognize(LegoBlocks))
         {
-            Vector3 size = namedPrefabs[item.Name].GetComponent<BoxCollider>().bounds.size;
-            Instantiate(namedPrefabs[item.Name], new Vector3(item.Position.x + size.x/2, size.y/2, item.Position.y + size.z/2), Quaternion.identity);
+            var sceneObject = Instantiate(namedPrefabs[item.Name]);
+            Vector3 translate = sceneObject.GetComponent<Collider>().bounds.extents - sceneObject.GetComponent<Collider>().bounds.center;
+            sceneObject.transform.position = new Vector3(item.Position.x + translate.x, translate.y, item.Position.y + translate.z);
         }
 
     }
