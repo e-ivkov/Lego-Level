@@ -6,7 +6,7 @@ using System.Linq;
 public class GridRecognizer : IRecognizer
 {
 
-    Vector2Int GridNumber;
+    protected Vector2Int GridNumber;
 
     Dictionary<Color, string> ColorBlockNames;
 
@@ -26,7 +26,9 @@ public class GridRecognizer : IRecognizer
             for (int j = 0; j < image.height; j++)
             {
                 //Debug.Log(i.ToString() + " " + j.ToString());
-                averageColors[i / (int)Mathf.Ceil((float)image.width / (float)GridNumber.x), j / (int)Mathf.Ceil((float)image.height / (float)GridNumber.y)] += (Vector4)image.GetPixel(i, j);
+                Vector2Int blockIndexes = GetBlockIndexes(new Vector2Int(i, j), image);
+                if(blockIndexes.x >= 0 && blockIndexes.y >= 0)
+                    averageColors[blockIndexes.x, blockIndexes.y] += (Vector4)image.GetPixel(i, j);
             }
         }
         var blocks = new List<RecognizedItem>();
@@ -41,5 +43,11 @@ public class GridRecognizer : IRecognizer
             }
         }
         return blocks;
+    }
+
+    public virtual Vector2Int GetBlockIndexes(Vector2Int pixelIndexes, Texture2D image){
+        int x = pixelIndexes.x / (int)Mathf.Ceil((float)image.width / (float)GridNumber.x);
+        int y = pixelIndexes.y / (int)Mathf.Ceil((float)image.height / (float)GridNumber.y);
+        return new Vector2Int(x, y);
     }
 }

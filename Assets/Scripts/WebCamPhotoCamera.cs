@@ -71,6 +71,7 @@ public class WebCamPhotoCamera : MonoBehaviour
                     for (int j = 0; j < width; j++)
                     {
                         photo.SetPixel(x + j, y + i, Color.green);
+
                     }
                 }
             }
