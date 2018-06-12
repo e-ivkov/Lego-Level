@@ -45,7 +45,7 @@ public class LevelBuilder : MonoBehaviour
         foreach (NamedPrefab namedPrefab in NamedPrefabs)
             namedPrefabs.Add(namedPrefab.Name, namedPrefab.gameObject);
 
-        var factory = new StructureRecognizerFactory(Structures, new SGRFactory(GridNumber, colorBlockNames, GetCornerVectors()));
+        var factory = new StructureRecognizerFactory(Structures, new GridRecognizerFactory(GridNumber, colorBlockNames));
         foreach (var item in factory.GetObject().Recognize(LegoBlocks))
         {
             var sceneObject = Instantiate(namedPrefabs[item.Name]);

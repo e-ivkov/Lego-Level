@@ -5,13 +5,13 @@ using UnityEngine;
 public class SkewedGridRecognizer : GridRecognizer
 {
     public Vector2[] Corners { get; set; } //in clockwise order, starting from topLeft
-    public SkewedGridRecognizer(Vector2Int gridNumber, Dictionary<Color, string> colorBlockNames) : base(gridNumber, colorBlockNames)
-    {
-    }
 
-    public override Vector2Int GetBlockIndexes(Vector2Int pixelIndexes, Texture2D image)
+    private Vector2[,] intersectionPoints;
+    
+    public SkewedGridRecognizer(Vector2Int gridNumber, Dictionary<Color, string> colorBlockNames, Vector2[] corners) : base(gridNumber, colorBlockNames)
     {
-        var intersectionPoints = new Vector2[GridNumber.x, GridNumber.y];
+        intersectionPoints = new Vector2[GridNumber.x, GridNumber.y];
+        Corners = corners;
         for (int i = 0; i < GridNumber.x; i++)
         {
             for (int j = 0; j < GridNumber.y; j++)
@@ -21,9 +21,15 @@ public class SkewedGridRecognizer : GridRecognizer
                 var B1 = (Corners[0] - Corners[3]) / GridNumber.y * j + Corners[3];
                 var B2 = (Corners[1] - Corners[2]) / GridNumber.y * j + Corners[2];
                 bool exists = false;
+                Debug.Log(i.ToString() + " " + j.ToString());
                 intersectionPoints[i, j] = Geometry2D.GetIntersectionPointCoordinates(A1, A2, B1, B2, out exists);
             }
         }
+    }
+
+    public override Vector2Int GetBlockIndexes(Vector2Int pixelIndexes, Texture2D image)
+    {
+        
         for (int i = 0; i < GridNumber.x - 1; i++)
         {
             for (int j = 0; j < GridNumber.y - 1; j++)

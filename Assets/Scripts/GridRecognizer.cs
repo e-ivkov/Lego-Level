@@ -20,7 +20,7 @@ public class GridRecognizer : IRecognizer
     {
         var gridColors = ColorBlockNames.Keys;
         Vector4[,] averageColors = new Vector4[GridNumber.x, GridNumber.y];
-        float nPixels = (image.width / GridNumber.x) * (image.height / GridNumber.y);
+
         for (int i = 0; i < image.width; i++)
         {
             for (int j = 0; j < image.height; j++)
@@ -36,13 +36,18 @@ public class GridRecognizer : IRecognizer
         {
             for (int j = 0; j < averageColors.GetLength(1); j++)
             {
-                averageColors[i, j] /= nPixels;
+                averageColors[i, j] /= GetNPixelsPerBlock(image);
                 blocks.Add(new RecognizedItem(new Vector2(i, j),
                     ColorBlockNames[gridColors.OrderBy(
                         color => Vector4.Distance(averageColors[i, j], color)).ToArray()[0]]));
             }
         }
         return blocks;
+    }
+
+    public virtual float GetNPixelsPerBlock(Texture2D image){
+        float nPixels = (image.width / GridNumber.x) * (image.height / GridNumber.y);;
+        return nPixels;
     }
 
     public virtual Vector2Int GetBlockIndexes(Vector2Int pixelIndexes, Texture2D image){

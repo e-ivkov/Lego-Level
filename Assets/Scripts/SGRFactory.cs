@@ -18,10 +18,7 @@ public class SGRFactory : RecognizerFactory
 
     protected override IRecognizer MakeRecognizer()
     {
-        var rec = new SkewedGridRecognizer(GridNumber, ColorBlockNames)
-        {
-            Corners = Corners
-        };
+        var rec = new SkewedGridRecognizer(GridNumber, ColorBlockNames, Corners);
         return rec;
     }
 }
