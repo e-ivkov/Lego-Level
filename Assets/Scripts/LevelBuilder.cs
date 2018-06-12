@@ -31,6 +31,8 @@ public class LevelBuilder : MonoBehaviour
 
     public Vector2Int GridNumber;
 
+    public GameObject[] Corners;
+
     // Use this for initialization
 
     public void BuildLevel()
@@ -51,6 +53,18 @@ public class LevelBuilder : MonoBehaviour
             sceneObject.transform.position = new Vector3(item.Position.x + translate.x, translate.y, item.Position.y + translate.z);
         }
 
+    }
+
+    public Vector2[] GetCornerVectors()
+    {
+        var vectors = new Vector2[4];
+        for (int i = 0; i < 4; i++)
+        {
+            int x = (int)(Corners[i].transform.position.x / 8 * LegoBlocks.width);
+            int y = (int)(Corners[i].transform.position.z / 6 * LegoBlocks.height);
+            vectors[i] = new Vector2(x, y);
+        }
+        return vectors;
     }
 
     void Start()

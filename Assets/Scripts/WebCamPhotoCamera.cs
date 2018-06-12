@@ -12,6 +12,7 @@ public class WebCamPhotoCamera : MonoBehaviour
     public GameObject gridPlane;
     LevelBuilder levelBuilder;
     Texture2D photo;
+    public Vector2[] Corners { get; set; }
 
     void Start()
     {
@@ -42,7 +43,7 @@ public class WebCamPhotoCamera : MonoBehaviour
             photo = new Texture2D(webCamTexture.width, webCamTexture.height);
             var pixels = webCamTexture.GetPixels();
             System.Array.Reverse(pixels);
-            Color[] c = photo.GetPixels(x, y, width-1, height-1);
+            Color[] c = photo.GetPixels(x, y, width - 1, height - 1);
             Texture2D m2Texture = new Texture2D(width, height);
             m2Texture.SetPixels(c);
             m2Texture.Apply();
@@ -51,9 +52,11 @@ public class WebCamPhotoCamera : MonoBehaviour
         }
         if (Input.GetMouseButtonDown(1)){
             photo = new Texture2D(webCamTexture.width, webCamTexture.height);
-            var pixels = webCamTexture.GetPixels();
-            System.Array.Reverse(pixels);
-            photo.SetPixels(pixels);
+            //var pixels = webCamTexture.GetPixels();
+            //System.Array.Reverse(pixels);
+            for (int i = 0; i < webCamTexture.width; i++)
+                for (int j = 0; j < webCamTexture.height; j++)
+                    photo.SetPixel(i, j, Color.clear);
             for (int i = 0; i < width; i++)
             {
                 if (i % (width/levelBuilder.GridNumber.x) == 0)
@@ -71,10 +74,14 @@ public class WebCamPhotoCamera : MonoBehaviour
                     for (int j = 0; j < width; j++)
                     {
                         photo.SetPixel(x + j, y + i, Color.green);
+
                     }
                 }
             }
             photo.SetPixel(0, 0, Color.red);
+            Color[] colors = photo.GetPixels();
+            System.Array.Reverse(colors);
+            photo.SetPixels(colors);
             photo.Apply();
             gridPlane.GetComponent<Renderer>().material.mainTexture = photo;
         }
