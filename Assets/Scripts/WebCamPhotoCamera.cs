@@ -40,11 +40,13 @@ public class WebCamPhotoCamera : MonoBehaviour
         int height = (int)((topLeft.transform.position.z - bottomRight.transform.position.z) / 6 * webCamTexture.height);
         if (Input.GetMouseButtonDown(0))
         {
-            photo = new Texture2D(webCamTexture.width, webCamTexture.height);
+            var m1Texture = new Texture2D(webCamTexture.width, webCamTexture.height);
             var pixels = webCamTexture.GetPixels();
             System.Array.Reverse(pixels);
-            Color[] c = photo.GetPixels(x, y, width - 1, height - 1);
-            Texture2D m2Texture = new Texture2D(width, height);
+            m1Texture.SetPixels(pixels);
+            m1Texture.Apply();
+            Color[] c = m1Texture.GetPixels(x, y, width - 1, height - 1);
+            Texture2D m2Texture = new Texture2D(width - 1, height - 1);
             m2Texture.SetPixels(c);
             m2Texture.Apply();
             levelBuilder.LegoBlocks = m2Texture;

@@ -240,22 +240,11 @@ MonoBehaviour:
     - Position: {x: 0, y: 0}
       Name: wallBlock
     Name: wall
-  - Priority: 0
-    Blocks:
-    - Position: {x: 0, y: 0}
-      Name: wallBlock
-    - Position: {x: 0, y: 1}
-      Name: wallBlock
-    - Position: {x: 1, y: 0}
-      Name: wallBlock
-    - Position: {x: 1, y: 1}
-      Name: wallBlock
-    Name: tower
   LegoBlocks: {fileID: 2800000, guid: 0ec9178269c234549a066df119f5195a, type: 3}
   ColorBlockNames:
   - Color: {r: 0, g: 0, b: 0, a: 0}
     Name: wallBlock
-  - Color: {r: 1, g: 1, b: 1, a: 0}
+  - Color: {r: 0.59607846, g: 0.60784316, b: 0.6039216, a: 0}
     Name: white
   NamedPrefabs:
   - Name: wall
@@ -264,7 +253,7 @@ MonoBehaviour:
   - Name: tower
     gameObject: {fileID: 1873432397809444, guid: b33e55b9faa804817aeb0c812fb2f46e,
       type: 2}
-  GridNumber: {x: 26, y: 26}
+  GridNumber: {x: 48, y: 45}
   Corners:
   - {fileID: 437986864}
   - {fileID: 659178219}
