@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.Linq;
+using System.IO;
 
 public class LevelBuilder : MonoBehaviour
 {
@@ -31,6 +32,8 @@ public class LevelBuilder : MonoBehaviour
 
     public Vector2Int GridNumber;
 
+    public GameObject[] Corners;
+
     // Use this for initialization
 
     public void BuildLevel()
@@ -42,6 +45,9 @@ public class LevelBuilder : MonoBehaviour
             colorBlockNames.Add(coloredBlock.Color, coloredBlock.Name);
         foreach (NamedPrefab namedPrefab in NamedPrefabs)
             namedPrefabs.Add(namedPrefab.Name, namedPrefab.gameObject);
+        byte[] bytes = LegoBlocks.EncodeToPNG();
+        // For testing purposes, also write to a file in the project folder
+        File.WriteAllBytes(Application.dataPath + "/PicToRecognize.png", bytes);
 
         var factory = new StructureRecognizerFactory(Structures, new GridRecognizerFactory(GridNumber, colorBlockNames));
         foreach (var item in factory.GetObject().Recognize(LegoBlocks))
@@ -53,8 +59,20 @@ public class LevelBuilder : MonoBehaviour
 
     }
 
+    public Vector2[] GetCornerVectors()
+    {
+        var vectors = new Vector2[4];
+        for (int i = 0; i < 4; i++)
+        {
+            int x = (int)(Corners[i].transform.position.x / 8 * LegoBlocks.width);
+            int y = (int)(Corners[i].transform.position.z / 6 * LegoBlocks.height);
+            vectors[i] = new Vector2(x, y);
+        }
+        return vectors;
+    }
+
     void Start()
     {
-        BuildLevel();
+        //BuildLevel();
     }
 }
