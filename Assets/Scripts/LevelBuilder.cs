@@ -49,12 +49,15 @@ public class LevelBuilder : MonoBehaviour
         // For testing purposes, also write to a file in the project folder
         File.WriteAllBytes(Application.dataPath + "/PicToRecognize.png", bytes);
 
-        var factory = new StructureRecognizerFactory(Structures, new GridRecognizerFactory(GridNumber, colorBlockNames));
+        var factory = new StructureRecognizerFactory(Structures, new GridRecognizerFactory(GridNumber, colorBlockNames), (float)0.6);
         foreach (var item in factory.GetObject().Recognize(LegoBlocks))
         {
             var sceneObject = Instantiate(namedPrefabs[item.Name]);
-            Vector3 translate = sceneObject.GetComponent<Collider>().bounds.extents - sceneObject.GetComponent<Collider>().bounds.center;
-            sceneObject.transform.position = new Vector3(item.Position.x + translate.x, translate.y, item.Position.y + translate.z);
+            float scaleFactor = 6 / (float)GridNumber.x;
+            sceneObject.transform.localScale = new Vector3(scaleFactor, scaleFactor, scaleFactor);
+            Vector3 translate = (sceneObject.GetComponent<Collider>().bounds.extents - sceneObject.GetComponent<Collider>().bounds.center)*scaleFactor;
+            translate += (new Vector3(Corners[0].transform.position.x, (float)0.033, Corners[2].transform.position.z)) * 3;
+            sceneObject.transform.position = new Vector3(item.Position.x * scaleFactor + translate.x, translate.y, item.Position.y * scaleFactor + translate.z);
         }
 
     }

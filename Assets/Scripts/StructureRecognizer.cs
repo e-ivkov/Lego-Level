@@ -9,10 +9,13 @@ public class StructureRecognizer : IRecognizer
 
     List<Structure> Structures;
 
-    public StructureRecognizer(List<Structure> structures, RecognizerFactory blockFactory)
+    private float precision;
+
+    public StructureRecognizer(List<Structure> structures, RecognizerFactory blockFactory, float precision)
     {
         Structures = structures;
         Factory = blockFactory;
+        this.precision = precision;
     }
 
     public List<RecognizedItem> Recognize(Texture2D image)
@@ -25,7 +28,7 @@ public class StructureRecognizer : IRecognizer
             foreach (Structure structure in Structures.OrderBy(structure => structure.Priority))
             {
                 var structureBlocks = structure.Blocks.Select(block => new RecognizedItem(block.Position + point, block.Name));
-                if (structureBlocks.All(structureBlock => blocks.Contains(structureBlock)))
+                if (structureBlocks.Count(structureBlock => blocks.Contains(structureBlock)) >= precision * structureBlocks.Count())
                 {
                     recognizedStructures.Add(new RecognizedItem(point, structure.Name));
                     var sBlocksSet = new HashSet<RecognizedItem>(structureBlocks);
