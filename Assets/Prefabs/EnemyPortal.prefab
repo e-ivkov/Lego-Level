@@ -107,7 +107,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fa350c6b0fbe4c7fa414ad5c060d16a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 0}
+  enemy: {fileID: 1936590942682770, guid: 7f7d129788bfb42eabdc5f4793e87fc7, type: 2}
   waves: 10
   waitBetweenWaves: 30
   waitBetweenUnits: 2

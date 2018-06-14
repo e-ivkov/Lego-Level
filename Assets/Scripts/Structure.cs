@@ -27,8 +27,14 @@ public struct Structure
         {
             for (int j = 0; j < blocks.height; j++)
             {
-                if (blocks.GetPixel(i, j).a > 0)
-                    Blocks.Add(new RecognizedItem(new Vector2(i, j), colorNames[blocks.GetPixel(i, j)]));
+                Debug.Log(blocks.GetPixel(i, j));
+                if (blocks.GetPixel(i, j) != Color.white)
+                {
+                    var c = blocks.GetPixel(i, j);
+                    c.a = 0;
+                    if(colorNames.ContainsKey(c))
+                        Blocks.Add(new RecognizedItem(new Vector2(i, j), colorNames[c]));
+                }
             }
         }
         Name = name;
