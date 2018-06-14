@@ -50,7 +50,7 @@ public class LevelBuilder : MonoBehaviour
         byte[] bytes = LegoBlocks.EncodeToPNG();
         // For testing purposes, also write to a file in the project folder
         File.WriteAllBytes(Application.dataPath + "/PicToRecognize.png", bytes);
-        var factory = new StructureRecognizerFactory(Structures, new GridRecognizerFactory(GridNumber, colorBlockNames), 1);
+        var factory = new StructureRecognizerFactory(Structures, new GridRecognizerFactory(GridNumber, colorBlockNames), (float)0.8);
         foreach (var item in factory.GetObject().Recognize(LegoBlocks))
         {
             var sceneObject = Instantiate(namedPrefabs[item.Name]);
@@ -59,7 +59,7 @@ public class LevelBuilder : MonoBehaviour
 
             Vector3 translate = new Vector3(Corners[0].transform.position.x, (float)0.01, Corners[2].transform.position.z);
             translate += (sceneObject.GetComponent<Collider>().bounds.extents + sceneObject.GetComponent<Collider>().bounds.center) * scaleFactor;
-            if (item.Name == "tower")
+            if (item.Name != "wall")
             {
                 translate += sceneObject.GetComponent<Collider>().bounds.size;
                 translate.y -= sceneObject.GetComponent<Collider>().bounds.size.y;
