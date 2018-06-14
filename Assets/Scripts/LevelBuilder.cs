@@ -50,7 +50,7 @@ public class LevelBuilder : MonoBehaviour
         byte[] bytes = LegoBlocks.EncodeToPNG();
         // For testing purposes, also write to a file in the project folder
         File.WriteAllBytes(Application.dataPath + "/PicToRecognize.png", bytes);
-        var factory = new StructureRecognizerFactory(Structures, new GridRecognizerFactory(GridNumber, colorBlockNames), (float)0.8);
+        var factory = new StructureRecognizerFactory(Structures, new GridRecognizerFactory(GridNumber, colorBlockNames), (float)0.7);
         foreach (var item in factory.GetObject().Recognize(LegoBlocks))
         {
             var sceneObject = Instantiate(namedPrefabs[item.Name]);
