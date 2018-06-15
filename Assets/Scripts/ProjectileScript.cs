@@ -6,7 +6,14 @@ public class ProjectileScript : MonoBehaviour
     public float damage;
 
     [HideInInspector]
-    public GameObject tower;
+    public float maxDistance;
+
+    Vector3 startingPosition;
+
+    private void Start()
+    {
+        startingPosition = transform.position;
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -24,7 +31,7 @@ public class ProjectileScript : MonoBehaviour
 
     private void Update()
     {
-        if (Vector3.Distance(transform.position, tower.transform.position) > tower.GetComponent<TowerScript>().visionR)
+        if (Vector3.Distance(transform.position, startingPosition) > maxDistance)
             Destroy(gameObject);
     }
 }

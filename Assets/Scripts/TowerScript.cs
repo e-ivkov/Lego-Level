@@ -48,7 +48,7 @@ public class TowerScript : MonoBehaviour
         var beta = Mathf.Asin(b.magnitude / (projectileSpeed * Mathf.Sin(alpha)));
         var c = beta > 0 ? Quaternion.Euler(0, beta, 0) * (a.normalized * -1) : (a.normalized * -1);
         var firedProj = Instantiate(projectile, transform.position, Quaternion.identity);
-        firedProj.GetComponent<ProjectileScript>().tower = gameObject;
+        firedProj.GetComponent<ProjectileScript>().maxDistance = visionR;
         firedProj.GetComponent<Rigidbody>().velocity = c.normalized * projectileSpeed;
         yield return new WaitForSeconds(cooldown);
         firing = false;
