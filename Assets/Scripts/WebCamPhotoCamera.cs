@@ -42,7 +42,9 @@ public class WebCamPhotoCamera : MonoBehaviour
         int height = (int)((topLeft.transform.position.z - bottomRight.transform.position.z) / 6 * webCamTexture.height);
         var m1Texture = new Texture2D(webCamTexture.width, webCamTexture.height);
         var pixels = webCamTexture.GetPixels();
-        System.Array.Reverse(pixels);
+        var startTime = Time.realtimeSinceStartup;
+        System.Array.Reverse(pixels); //TODO: improve performance here (probably through threads and making it into coroutine)
+        Debug.Log(Time.realtimeSinceStartup - startTime);
         m1Texture.SetPixels(pixels);
         m1Texture.Apply();
         Color[] c = m1Texture.GetPixels(x, y, width - 1, height - 1);

@@ -40,6 +40,7 @@ public class LevelBuilder : MonoBehaviour
 
     public IEnumerator BuildLevel()
     {
+        
         var colorBlockNames = new Dictionary<Color, string>();
         var namedPrefabs = new Dictionary<string, GameObject>();
 
@@ -47,23 +48,13 @@ public class LevelBuilder : MonoBehaviour
             colorBlockNames.Add(coloredBlock.Color, coloredBlock.Name);
         foreach (NamedPrefab namedPrefab in NamedPrefabs)
             namedPrefabs.Add(namedPrefab.Name, namedPrefab.gameObject);
-        byte[] bytes = LegoBlocks.EncodeToPNG();
+        /*byte[] bytes = LegoBlocks.EncodeToPNG();
         // For testing purposes, also write to a file in the project folder
-        File.WriteAllBytes(Application.dataPath + "/PicToRecognize.png", bytes);
+        File.WriteAllBytes(Application.dataPath + "/PicToRecognize.png", bytes);*/
         var factory = new StructureRecognizerFactory(Structures, new GridRecognizerFactory(GridNumber, colorBlockNames), (float)0.7);
-
         var rec = new ThreadedRecognizer();
-        var image = new Color[LegoBlocks.width, LegoBlocks.height];
-        for (int i = 0; i < LegoBlocks.width; i++)
-        {
-            for (int j = 0; j < LegoBlocks.height; j++)
-            {
-                image[i, j] = LegoBlocks.GetPixel(i, j);
-            }
-        }
-        var startTime = Time.realtimeSinceStartup;
-        rec.Recognize(factory.GetObject(), image);
-        Debug.Log(Time.realtimeSinceStartup - startTime);
+        rec.Recognize(factory.GetObject(), LegoBlocks.GetPixels(), LegoBlocks.width, LegoBlocks.height);
+
         yield return new WaitUntil(() => rec.Completed);
         var recognizedItems = rec.Result;
 

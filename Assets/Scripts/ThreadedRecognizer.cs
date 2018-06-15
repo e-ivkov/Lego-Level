@@ -6,7 +6,9 @@ public class ThreadedRecognizer
 {
     IRecognizer recognizer;
 
-    Color[,] texture;
+    Color[] texture;
+    int width;
+    int height;
 
     private System.ComponentModel.BackgroundWorker BackgroundWorker1
     = new System.ComponentModel.BackgroundWorker();
@@ -21,11 +23,13 @@ public class ThreadedRecognizer
         get; private set;
     }
 
-    public void Recognize(IRecognizer recognizer, Color[,] texture)
+    public void Recognize(IRecognizer recognizer, Color[] texture, int width, int height)
     {
 
         this.recognizer = recognizer;
         this.texture = texture;
+        this.width = width;
+        this.height = height;
         InitializeBackgroundWorker();
 
         // Start the asynchronous operation.  
@@ -45,7 +49,16 @@ public class ThreadedRecognizer
     {
         IRecognizer rec = (IRecognizer)e.Argument;
         // Return the value through the Result property.  
-        e.Result = rec.Recognize(texture);
+        Color[,] pixels = new Color[width, height];
+        for (int i = 0; i < width; i++)
+        {
+            for (int j = 0; j < height; j++)
+            {
+                pixels[i, j] = texture[width * j + i];
+            }
+
+        }
+        e.Result = rec.Recognize(pixels);
     }
 
     void BackgroundWorker1_RunWorkerCompleted(

@@ -21,6 +21,7 @@ public class TowerBuilder : MonoBehaviour
         levelBuilder.ColorPaletteNames = GameObject.Find("LevelBuilder").GetComponent<LevelBuilder>().ColorPaletteNames;
         while (active)
         {
+            
             foreach (var tower in GameObject.FindGameObjectsWithTag("tower"))
                 tower.tag = "old";
             levelBuilder.LegoBlocks = webCam.GetTexture();
