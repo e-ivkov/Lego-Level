@@ -223,9 +223,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96c8959ae2a874452a58a36cbb53ad04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  visionR: 1
+  visionR: 1.5
   projectile: {fileID: 1865088774096216, guid: 18275e6278e9b453987f1616dd1c839d, type: 2}
   projectileSpeed: 1
+  cooldown: 0.5
 --- !u!135 &135567863257049340
 SphereCollider:
   m_ObjectHideFlags: 1

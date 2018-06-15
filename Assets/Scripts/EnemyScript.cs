@@ -23,4 +23,14 @@ public class EnemyScript : MonoBehaviour {
     public Vector3 GetPositionAfterTime(float seconds){
         return agent.velocity*seconds + transform.position;
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("gate"))
+        {
+            Debug.Log(other.name);
+            other.GetComponent<GateScript>().DefensePoints--;
+            Destroy(gameObject);
+        }
+    }
 }

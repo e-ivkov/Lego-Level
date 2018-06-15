@@ -22,7 +22,6 @@ GameObject:
   - component: {fileID: 33893733289288832}
   - component: {fileID: 65274037235963872}
   - component: {fileID: 23325874638590054}
-  - component: {fileID: 114980254683699198}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -39,6 +38,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4869754291023312}
   - component: {fileID: 65678448926470076}
+  - component: {fileID: 114133701170261078}
   m_Layer: 0
   m_Name: EnemyPortal
   m_TagString: Untagged
@@ -138,12 +138,12 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 6, y: 6, z: 6}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114980254683699198
+--- !u!114 &114133701170261078
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1457536908960206}
+  m_GameObject: {fileID: 1625496408349938}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9fa350c6b0fbe4c7fa414ad5c060d16a, type: 3}
