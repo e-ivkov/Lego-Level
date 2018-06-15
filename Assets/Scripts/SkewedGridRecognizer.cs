@@ -27,7 +27,7 @@ public class SkewedGridRecognizer : GridRecognizer
         }
     }
 
-    public override Vector2Int GetBlockIndexes(Vector2Int pixelIndexes, Texture2D image)
+    public override Vector2Int GetBlockIndexes(Vector2Int pixelIndexes, Color[,] image)
     {
         
         for (int i = 0; i < GridNumber.x - 1; i++)

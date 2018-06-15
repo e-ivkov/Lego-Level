@@ -22,9 +22,11 @@ public class TowerBuilder : MonoBehaviour
         while (active)
         {
             foreach (var tower in GameObject.FindGameObjectsWithTag("tower"))
-                Destroy(tower);
+                tower.tag = "old";
             levelBuilder.LegoBlocks = webCam.GetTexture();
-            levelBuilder.BuildLevel();
+            yield return levelBuilder.BuildLevel();
+            foreach (var tower in GameObject.FindGameObjectsWithTag("old"))
+                Destroy(tower);
             yield return new WaitForSeconds(waitingPeriod);
         }
     }

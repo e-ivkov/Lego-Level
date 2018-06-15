@@ -16,19 +16,20 @@ public class GridRecognizer : IRecognizer
         ColorBlockNames = colorBlockNames;
     }
 
-    public List<RecognizedItem> Recognize(Texture2D image)
+    public List<RecognizedItem> Recognize(Color[,] image)
     {
         var gridColors = ColorBlockNames.Keys;
         Vector4[,] averageColors = new Vector4[GridNumber.x, GridNumber.y];
-
-        for (int i = 0; i < image.width; i++)
+        int width = image.GetLength(0); // NOTE: not sure if the order of dimensions is right
+        int height = image.GetLength(1);
+        for (int i = 0; i < width; i++)
         {
-            for (int j = 0; j < image.height; j++)
+            for (int j = 0; j < height; j++)
             {
                 //Debug.Log(i.ToString() + " " + j.ToString());
                 Vector2Int blockIndexes = GetBlockIndexes(new Vector2Int(i, j), image);
                 if(blockIndexes.x >= 0 && blockIndexes.y >= 0)
-                    averageColors[blockIndexes.x, blockIndexes.y] += (Vector4)image.GetPixel(i, j);
+                    averageColors[blockIndexes.x, blockIndexes.y] += (Vector4)image[i, j];
             }
         }
         var blocks = new List<RecognizedItem>();
@@ -46,14 +47,14 @@ public class GridRecognizer : IRecognizer
         return blocks;
     }
 
-    public virtual float GetNPixelsPerBlock(Texture2D image){
-        float nPixels = ((float)image.width / (float)GridNumber.x) * ((float)image.height / (float)GridNumber.y);
+    public virtual float GetNPixelsPerBlock(Color[,] image){
+        float nPixels = ((float)image.GetLength(0) / (float)GridNumber.x) * ((float)image.GetLength(1) / (float)GridNumber.y);
         return nPixels;
     }
 
-    public virtual Vector2Int GetBlockIndexes(Vector2Int pixelIndexes, Texture2D image){
-        int x = pixelIndexes.x / (int)Mathf.Ceil((float)image.width / (float)GridNumber.x);
-        int y = pixelIndexes.y / (int)Mathf.Ceil((float)image.height / (float)GridNumber.y);
+    public virtual Vector2Int GetBlockIndexes(Vector2Int pixelIndexes, Color[,] image){
+        int x = pixelIndexes.x / (int)Mathf.Ceil((float)image.GetLength(0) / (float)GridNumber.x);
+        int y = pixelIndexes.y / (int)Mathf.Ceil((float)image.GetLength(1) / (float)GridNumber.y);
         return new Vector2Int(x, y);
     }
 }

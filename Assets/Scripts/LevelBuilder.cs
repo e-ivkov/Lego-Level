@@ -38,7 +38,7 @@ public class LevelBuilder : MonoBehaviour
 
     // Use this for initialization
 
-    public void BuildLevel()
+    public IEnumerator BuildLevel()
     {
         var colorBlockNames = new Dictionary<Color, string>();
         var namedPrefabs = new Dictionary<string, GameObject>();
@@ -51,7 +51,23 @@ public class LevelBuilder : MonoBehaviour
         // For testing purposes, also write to a file in the project folder
         File.WriteAllBytes(Application.dataPath + "/PicToRecognize.png", bytes);
         var factory = new StructureRecognizerFactory(Structures, new GridRecognizerFactory(GridNumber, colorBlockNames), (float)0.7);
-        foreach (var item in factory.GetObject().Recognize(LegoBlocks))
+
+        var rec = new ThreadedRecognizer();
+        var image = new Color[LegoBlocks.width, LegoBlocks.height];
+        for (int i = 0; i < LegoBlocks.width; i++)
+        {
+            for (int j = 0; j < LegoBlocks.height; j++)
+            {
+                image[i, j] = LegoBlocks.GetPixel(i, j);
+            }
+        }
+        var startTime = Time.realtimeSinceStartup;
+        rec.Recognize(factory.GetObject(), image);
+        Debug.Log(Time.realtimeSinceStartup - startTime);
+        yield return new WaitUntil(() => rec.Completed);
+        var recognizedItems = rec.Result;
+
+        foreach (var item in recognizedItems)
         {
             var sceneObject = Instantiate(namedPrefabs[item.Name]);
             float scaleFactor = 6 / (float)GridNumber.x;
@@ -66,6 +82,7 @@ public class LevelBuilder : MonoBehaviour
             }
             sceneObject.transform.position = new Vector3(item.Position.x * scaleFactor + translate.x, translate.y, item.Position.y * scaleFactor + translate.z);
         }
+
 
     }
 

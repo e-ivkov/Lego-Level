@@ -62,7 +62,7 @@ public class WebCamPhotoCamera : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             levelBuilder.LegoBlocks = GetTexture();
-            levelBuilder.BuildLevel();
+            StartCoroutine(levelBuilder.BuildLevel());
             towerBuilder.active = true;
             towerBuilder.StartCoroutine(towerBuilder.BuildTowers());
         }
