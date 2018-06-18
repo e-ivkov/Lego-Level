@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WebCamPhotoCamera : MonoBehaviour
 {
-    
+
     WebCamTexture webCamTexture;
     public string DeviceName;
     public GameObject topLeft;
@@ -15,6 +15,7 @@ public class WebCamPhotoCamera : MonoBehaviour
     TowerBuilder towerBuilder;
     Texture2D photo;
     public Vector2[] Corners { get; set; }
+    public Texture2D calculatedTexture;
 
     void Start()
     {
@@ -35,23 +36,38 @@ public class WebCamPhotoCamera : MonoBehaviour
         }
     }
 
-    public Texture2D GetTexture(){
+    public IEnumerator CalculateTexture()
+    {
         int x = (int)(topLeft.transform.position.x / 8 * webCamTexture.width);
         int y = (int)(bottomRight.transform.position.z / 6 * webCamTexture.height);
         int width = (int)((bottomRight.transform.position.x - topLeft.transform.position.x) / 8 * webCamTexture.width);
         int height = (int)((topLeft.transform.position.z - bottomRight.transform.position.z) / 6 * webCamTexture.height);
         var m1Texture = new Texture2D(webCamTexture.width, webCamTexture.height);
         var pixels = webCamTexture.GetPixels();
+        var backgroundWorker = new System.ComponentModel.BackgroundWorker();
+        var sorted = false;
+        backgroundWorker.DoWork += (sender, e) => System.Array.Reverse(pixels); //TODO: improve performance here (probably through threads and making it into coroutine)
+        backgroundWorker.RunWorkerCompleted += (sender, e) => sorted = true;
+        backgroundWorker.RunWorkerAsync();
+        yield return new WaitUntil(() => sorted);
         var startTime = Time.realtimeSinceStartup;
-        System.Array.Reverse(pixels); //TODO: improve performance here (probably through threads and making it into coroutine)
-        Debug.Log(Time.realtimeSinceStartup - startTime);
         m1Texture.SetPixels(pixels);
         m1Texture.Apply();
+        Debug.Log(Time.realtimeSinceStartup - startTime);
         Color[] c = m1Texture.GetPixels(x, y, width - 1, height - 1);
         Texture2D m2Texture = new Texture2D(width - 1, height - 1);
         m2Texture.SetPixels(c);
         m2Texture.Apply();
-        return m2Texture;
+        calculatedTexture = m2Texture;
+    }
+
+    private IEnumerator StartBuildingLevel()
+    {
+        yield return CalculateTexture();
+        levelBuilder.LegoBlocks = calculatedTexture;
+        yield return levelBuilder.BuildLevel();
+        towerBuilder.active = true;
+        towerBuilder.StartCoroutine(towerBuilder.BuildTowers());
     }
 
     private void Update()
@@ -63,10 +79,7 @@ public class WebCamPhotoCamera : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            levelBuilder.LegoBlocks = GetTexture();
-            StartCoroutine(levelBuilder.BuildLevel());
-            towerBuilder.active = true;
-            towerBuilder.StartCoroutine(towerBuilder.BuildTowers());
+            StartCoroutine(StartBuildingLevel());
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {

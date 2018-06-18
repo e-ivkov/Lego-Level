@@ -24,7 +24,8 @@ public class TowerBuilder : MonoBehaviour
             
             foreach (var tower in GameObject.FindGameObjectsWithTag("tower"))
                 tower.tag = "old";
-            levelBuilder.LegoBlocks = webCam.GetTexture();
+            yield return webCam.CalculateTexture();
+            levelBuilder.LegoBlocks = webCam.calculatedTexture;
             yield return levelBuilder.BuildLevel();
             foreach (var tower in GameObject.FindGameObjectsWithTag("old"))
                 Destroy(tower);
