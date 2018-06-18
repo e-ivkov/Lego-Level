@@ -223,9 +223,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96c8959ae2a874452a58a36cbb53ad04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  visionR: 1.5
+  visionR: 15
   projectile: {fileID: 1865088774096216, guid: 18275e6278e9b453987f1616dd1c839d, type: 2}
-  projectileSpeed: 1
+  projectileSpeed: 10
   cooldown: 0.5
 --- !u!135 &135567863257049340
 SphereCollider:
@@ -253,4 +253,4 @@ NavMeshObstacle:
   m_Carve: 1
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 1, z: 0}
-  m_TimeToStationary: 0.5
+  m_TimeToStationary: 2

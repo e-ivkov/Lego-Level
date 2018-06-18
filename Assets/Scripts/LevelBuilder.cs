@@ -10,6 +10,7 @@ public class LevelBuilder : MonoBehaviour
 
     public List<Structure> Structures;
     public List<ImportStructure> ImportStructures;
+    public WebCamPhotoCamera webCamPhotoCamera;
 
     public Texture2D LegoBlocks;
 
@@ -40,7 +41,7 @@ public class LevelBuilder : MonoBehaviour
 
     public IEnumerator BuildLevel()
     {
-        
+
         var colorBlockNames = new Dictionary<Color, string>();
         var namedPrefabs = new Dictionary<string, GameObject>();
 
@@ -61,17 +62,27 @@ public class LevelBuilder : MonoBehaviour
         foreach (var item in recognizedItems)
         {
             var sceneObject = Instantiate(namedPrefabs[item.Name]);
-            float scaleFactor = 6 / (float)GridNumber.x;
+            float scaleFactor = WebCamPhotoCamera.scale.y / (float)GridNumber.x;
+            var scale = webCamPhotoCamera.GetScale();
             sceneObject.transform.localScale = new Vector3(scaleFactor, scaleFactor, scaleFactor);
-
-            Vector3 translate = new Vector3(Corners[0].transform.position.x, (float)0.01, Corners[2].transform.position.z);
-            translate += (sceneObject.GetComponent<Collider>().bounds.extents + sceneObject.GetComponent<Collider>().bounds.center) * scaleFactor;
-            if (item.Name != "wall")
-            {
-                translate += sceneObject.GetComponent<Collider>().bounds.size;
-                translate.y -= sceneObject.GetComponent<Collider>().bounds.size.y;
+            var unit_x = (Corners[2].transform.position.x - Corners[0].transform.position.x) / GridNumber.x;
+            var unit_y = (Corners[0].transform.position.z - Corners[2].transform.position.z) / GridNumber.y;
+            Vector3 translate = new Vector3(Corners[0].transform.position.x, 0, Corners[2].transform.position.z);
+            sceneObject.transform.position = new Vector3(item.Position.x * unit_x + translate.x, translate.y, item.Position.y * unit_y + translate.z);
+            switch(item.Name){
+                case "wall":
+                    sceneObject.transform.Translate(scaleFactor, (float)0.5*scaleFactor, scaleFactor);
+                    break;
+                case "tower":
+                    sceneObject.transform.Translate(2*scaleFactor, scaleFactor, 2*scaleFactor);
+                    break;
+                case "Gate":
+                    sceneObject.transform.Translate(3*scaleFactor, scaleFactor, 3*scaleFactor);
+                    break;
+                case "EnemyPortal":
+                    sceneObject.transform.Translate(3*scaleFactor, scaleFactor, 3*scaleFactor);
+                    break;
             }
-            sceneObject.transform.position = new Vector3(item.Position.x * scaleFactor + translate.x, translate.y, item.Position.y * scaleFactor + translate.z);
         }
 
 
@@ -82,8 +93,8 @@ public class LevelBuilder : MonoBehaviour
         var vectors = new Vector2[4];
         for (int i = 0; i < 4; i++)
         {
-            int x = (int)(Corners[i].transform.position.x / 8 * LegoBlocks.width);
-            int y = (int)(Corners[i].transform.position.z / 6 * LegoBlocks.height);
+            int x = (int)(Corners[i].transform.position.x / WebCamPhotoCamera.scale.x * LegoBlocks.width);
+            int y = (int)(Corners[i].transform.position.z / WebCamPhotoCamera.scale.y * LegoBlocks.height);
             vectors[i] = new Vector2(x, y);
         }
         return vectors;
@@ -91,6 +102,7 @@ public class LevelBuilder : MonoBehaviour
 
     void Start()
     {
+        webCamPhotoCamera = GameObject.Find("Plane").GetComponent<WebCamPhotoCamera>();
         DoImportStructures();
     }
 

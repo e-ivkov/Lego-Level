@@ -16,6 +16,7 @@ public class WebCamPhotoCamera : MonoBehaviour
     Texture2D photo;
     public Vector2[] Corners { get; set; }
     public Texture2D calculatedTexture;
+    public static Vector2 scale = new Vector2(80, 60);
 
     void Start()
     {
@@ -38,10 +39,10 @@ public class WebCamPhotoCamera : MonoBehaviour
 
     public IEnumerator CalculateTexture()
     {
-        int x = (int)(topLeft.transform.position.x / 8 * webCamTexture.width);
-        int y = (int)(bottomRight.transform.position.z / 6 * webCamTexture.height);
-        int width = (int)((bottomRight.transform.position.x - topLeft.transform.position.x) / 8 * webCamTexture.width);
-        int height = (int)((topLeft.transform.position.z - bottomRight.transform.position.z) / 6 * webCamTexture.height);
+        int x = (int)(topLeft.transform.position.x / scale.x * webCamTexture.width);
+        int y = (int)(bottomRight.transform.position.z / scale.y * webCamTexture.height);
+        int width = (int)((bottomRight.transform.position.x - topLeft.transform.position.x) / scale.x * webCamTexture.width);
+        int height = (int)((topLeft.transform.position.z - bottomRight.transform.position.z) / scale.y * webCamTexture.height);
         var m1Texture = new Texture2D(webCamTexture.width, webCamTexture.height);
         var pixels = webCamTexture.GetPixels();
         var backgroundWorker = new System.ComponentModel.BackgroundWorker();
@@ -70,12 +71,20 @@ public class WebCamPhotoCamera : MonoBehaviour
         towerBuilder.StartCoroutine(towerBuilder.BuildTowers());
     }
 
+    public int[] GetScale(){
+        int x = (int)(topLeft.transform.position.x / scale.x * webCamTexture.width);
+        int y = (int)(bottomRight.transform.position.z / scale.y * webCamTexture.height);
+        int width = (int)((bottomRight.transform.position.x - topLeft.transform.position.x) / scale.x * webCamTexture.width);
+        int height = (int)((topLeft.transform.position.z - bottomRight.transform.position.z) / scale.y * webCamTexture.height);
+        return new int[4] { x, y, width, height };
+    }
+
     private void Update()
     {
-        int x = (int)(topLeft.transform.position.x / 8 * webCamTexture.width);
-        int y = (int)(bottomRight.transform.position.z / 6 * webCamTexture.height);
-        int width = (int)((bottomRight.transform.position.x - topLeft.transform.position.x) / 8 * webCamTexture.width);
-        int height = (int)((topLeft.transform.position.z - bottomRight.transform.position.z) / 6 * webCamTexture.height);
+        int x = (int)(topLeft.transform.position.x / scale.x * webCamTexture.width);
+        int y = (int)(bottomRight.transform.position.z / scale.y * webCamTexture.height);
+        int width = (int)((bottomRight.transform.position.x - topLeft.transform.position.x) / scale.x * webCamTexture.width);
+        int height = (int)((topLeft.transform.position.z - bottomRight.transform.position.z) / scale.y * webCamTexture.height);
 
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
@@ -126,10 +135,10 @@ public class WebCamPhotoCamera : MonoBehaviour
 
     void LoadPalette()
     {
-        int x = (int)(topLeftPalette.transform.position.x / 8 * webCamTexture.width);
-        int y = (int)(bottomRight.transform.position.z / 6 * webCamTexture.height);
-        int width = (int)((bottomRight.transform.position.x - topLeftPalette.transform.position.x) / 8 * webCamTexture.width);
-        int height = (int)((topLeftPalette.transform.position.z - bottomRight.transform.position.z) / 6 * webCamTexture.height);
+        int x = (int)(topLeftPalette.transform.position.x / scale.x * webCamTexture.width);
+        int y = (int)(bottomRight.transform.position.z / scale.y * webCamTexture.height);
+        int width = (int)((bottomRight.transform.position.x - topLeftPalette.transform.position.x) / scale.x * webCamTexture.width);
+        int height = (int)((topLeftPalette.transform.position.z - bottomRight.transform.position.z) / scale.y * webCamTexture.height);
         var palette = levelBuilder.ColorPaletteNames;
         var m1Texture = new Texture2D(webCamTexture.width, webCamTexture.height);
         var pixels = webCamTexture.GetPixels();
