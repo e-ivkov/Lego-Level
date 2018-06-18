@@ -11,12 +11,13 @@ public class EnemySpawner : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        StartCoroutine(Spawn());
+        
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
+        if(Input.GetKey(KeyCode.Alpha4))
+            StartCoroutine(Spawn());
 	}
 
     IEnumerator Spawn(){
@@ -24,10 +25,7 @@ public class EnemySpawner : MonoBehaviour {
         for (int i = 0; i < waves; i++){
             for (int j = 0; j < nUnits; j++)
             {
-                var gates = GameObject.FindGameObjectsWithTag("gate");
-                var unit = Instantiate(enemy);
-                unit.transform.position = transform.position;
-                unit.GetComponent<EnemyScript>().Goal = gates[Random.Range(0, gates.Length)].transform;
+                var unit = Instantiate(enemy,transform.position, Quaternion.identity);
                 yield return new WaitForSeconds(waitBetweenUnits);
             }
             yield return new WaitForSeconds(waitBetweenWaves);

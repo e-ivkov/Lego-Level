@@ -7,15 +7,18 @@ public class StructureRecognizerFactory : RecognizerFactory
 
     List<Structure> Structures;
 
-    public StructureRecognizerFactory(List<Structure> structures, RecognizerFactory blockFactory)
+    private float precision;
+
+    public StructureRecognizerFactory(List<Structure> structures, RecognizerFactory blockFactory, float precision)
     {
         Structures = structures;
         Factory = blockFactory;
+        this.precision = precision;
     }
 
     protected override IRecognizer MakeRecognizer()
     {
-        return new StructureRecognizer(Structures, Factory);
+        return new StructureRecognizer(Structures, Factory, precision);
     }
 }
 

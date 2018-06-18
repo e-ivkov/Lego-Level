@@ -18,6 +18,27 @@ public struct Structure
         Blocks = blocks;
         Name = name;
     }
+
+    public Structure(int priority, Texture2D blocks, Dictionary<Color, string> colorNames, string name)
+    {
+        Priority = priority;
+        Blocks = new List<RecognizedItem>();
+        for (int i = 0; i < blocks.width; i++)
+        {
+            for (int j = 0; j < blocks.height; j++)
+            {
+                Debug.Log(blocks.GetPixel(i, j));
+                if (blocks.GetPixel(i, j) != Color.white)
+                {
+                    var c = blocks.GetPixel(i, j);
+                    c.a = 0;
+                    if(colorNames.ContainsKey(c))
+                        Blocks.Add(new RecognizedItem(new Vector2(i, j), colorNames[c]));
+                }
+            }
+        }
+        Name = name;
+    }
 }
 
 

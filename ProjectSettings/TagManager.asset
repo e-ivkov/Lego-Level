@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - gate
+  - enemy
+  - tower
+  - old
   layers:
   - Default
   - TransparentFX
