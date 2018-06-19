@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac61de645ac2c45ae9e9d1f0f2ba90a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health: 100
+  Health: 200
   Speed: 0
   Goal: {fileID: 0}
   pathUpdateDelay: 2
@@ -122,13 +122,13 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 1
-  m_Speed: 3
+  m_Speed: 4
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 0
-  m_AutoBraking: 1
+  m_AutoBraking: 0
   m_AutoRepath: 0
   m_Height: 2
   m_BaseOffset: 1
