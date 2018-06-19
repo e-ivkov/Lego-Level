@@ -150,6 +150,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 1936590942682770, guid: 7f7d129788bfb42eabdc5f4793e87fc7, type: 2}
-  waves: 10
-  waitBetweenWaves: 30
-  waitBetweenUnits: 2
+  waves: 100
+  waitBetweenWaves: 20
+  waitBetweenUnits: 1

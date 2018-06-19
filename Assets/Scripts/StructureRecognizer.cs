@@ -18,7 +18,7 @@ public class StructureRecognizer : IRecognizer
         this.precision = precision;
     }
 
-    public List<RecognizedItem> Recognize(Texture2D image)
+    public List<RecognizedItem> Recognize(Color[,] image)
     {
         var blocks = new HashSet<RecognizedItem>(Factory.GetObject().Recognize(image));
         var coords = blocks.ToList().Select(block => new Vector2(block.Position.x, block.Position.y));
