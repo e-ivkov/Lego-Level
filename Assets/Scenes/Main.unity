@@ -272,7 +272,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 583551407}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 46.5, y: 0, z: 2.2}
+  m_LocalPosition: {x: 41.4, y: 0, z: 2.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -404,9 +404,13 @@ MonoBehaviour:
     Name: purple
   ColorPaletteNames:
   - Color: {r: 0, g: 0, b: 0, a: 0}
+    Name: gray no shadow
+  - Color: {r: 0, g: 0, b: 0, a: 0}
+    Name: gray half shadow
+  - Color: {r: 0, g: 0, b: 0, a: 0}
     Name: black
   - Color: {r: 0, g: 0, b: 0, a: 0}
-    Name: white
+    Name: gray full shadow
   - Color: {r: 0, g: 0, b: 0, a: 0}
     Name: blue
   - Color: {r: 0, g: 0, b: 0, a: 0}
@@ -429,7 +433,7 @@ MonoBehaviour:
   - Name: tower
     gameObject: {fileID: 1873432397809444, guid: b33e55b9faa804817aeb0c812fb2f46e,
       type: 2}
-    shiftScaling: {x: 2, y: 1, z: 2}
+    shiftScaling: {x: 1, y: 1, z: 1}
   - Name: Gate
     gameObject: {fileID: 1938925362767104, guid: 6cb7a282d5ca143e785a3b17ea8011fe,
       type: 2}
@@ -441,7 +445,7 @@ MonoBehaviour:
   - Name: PowerConduit
     gameObject: {fileID: 1242505721244612, guid: 6ddc4889c60be4e6fa9b928dd4b087d8,
       type: 2}
-    shiftScaling: {x: 2, y: 1, z: 2}
+    shiftScaling: {x: 1, y: 1, z: 1}
   GridNumber: {x: 48, y: 46}
   Corners:
   - {fileID: 437986864}
@@ -604,8 +608,8 @@ MonoBehaviour:
       Name: yellow
     Name: PowerConduit
   ImportStructures: []
-  webCamPhotoCamera: {fileID: 0}
-  LegoBlocks: {fileID: 2800000, guid: 0ec9178269c234549a066df119f5195a, type: 3}
+  webCamPhotoCamera: {fileID: 779918919}
+  LegoBlocks: {fileID: 0}
   ColorBlockNames:
   - Color: {r: 0, g: 0, b: 0, a: 0}
     Name: black
@@ -626,33 +630,33 @@ MonoBehaviour:
   - Color: {r: 0.7793102, g: 0.49803922, b: 1, a: 0}
     Name: purple
   ColorPaletteNames:
-  - Color: {r: 0, g: 0, b: 0, a: 0}
+  - Color: {r: 0.16601478, g: 0.1656895, b: 0.16902144, a: 0}
     Name: black
-  - Color: {r: 0, g: 0, b: 0, a: 0}
+  - Color: {r: 0.4129628, g: 0.42491305, b: 0.4522983, a: 0}
     Name: white
-  - Color: {r: 0, g: 0, b: 0, a: 0}
+  - Color: {r: 0.21496809, g: 0.40823594, b: 0.73184544, a: 0}
     Name: blue
-  - Color: {r: 0, g: 0, b: 0, a: 0}
+  - Color: {r: 0.7736134, g: 0.2679217, b: 0.23178731, a: 0}
     Name: red
-  - Color: {r: 0, g: 0, b: 0, a: 0}
+  - Color: {r: 0.9267852, g: 0.77419037, b: 0.316937, a: 0}
     Name: yellow
-  - Color: {r: 0, g: 0, b: 0, a: 0}
+  - Color: {r: 0.8589404, g: 0.4841366, b: 0.64509326, a: 0}
     Name: pink
-  - Color: {r: 0, g: 0, b: 0, a: 0}
+  - Color: {r: 0.2760853, g: 0.50983644, b: 0.40723696, a: 0}
     Name: green
-  - Color: {r: 0, g: 0, b: 0, a: 0}
+  - Color: {r: 0.5905861, g: 0.70136917, b: 0.33738446, a: 0}
     Name: lime green
-  - Color: {r: 0, g: 0, b: 0, a: 0}
+  - Color: {r: 0.5800302, g: 0.508251, b: 0.6833763, a: 0}
     Name: purple
   NamedPrefabs:
   - Name: tower
     gameObject: {fileID: 1873432397809444, guid: b33e55b9faa804817aeb0c812fb2f46e,
       type: 2}
-    shiftScaling: {x: 2, y: 1, z: 2}
+    shiftScaling: {x: 1, y: 1, z: 1}
   - Name: PowerConduit
     gameObject: {fileID: 1242505721244612, guid: 6ddc4889c60be4e6fa9b928dd4b087d8,
       type: 2}
-    shiftScaling: {x: 2, y: 1, z: 2}
+    shiftScaling: {x: 1, y: 1, z: 1}
   GridNumber: {x: 48, y: 46}
   Corners:
   - {fileID: 437986864}

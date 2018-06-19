@@ -9,6 +9,8 @@ public class TowerScript : MonoBehaviour
     public float projectileSpeed;
     public float cooldown;
 
+    public float damageBonus = 0;
+
     GameObject target;
     bool hasTarget = false;
     bool firing = false;
@@ -49,6 +51,7 @@ public class TowerScript : MonoBehaviour
         var c = beta > 0 ? Quaternion.Euler(0, beta, 0) * (a.normalized * -1) : (a.normalized * -1);
         var firedProj = Instantiate(projectile, transform.position, Quaternion.identity);
         firedProj.GetComponent<ProjectileScript>().maxDistance = visionR;
+        firedProj.GetComponent<ProjectileScript>().damage += damageBonus;
         //Debug.Log(b);
         firedProj.GetComponent<Rigidbody>().velocity = c.normalized * projectileSpeed;
         yield return new WaitForSeconds(cooldown);
