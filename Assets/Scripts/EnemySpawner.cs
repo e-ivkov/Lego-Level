@@ -8,7 +8,8 @@ public class EnemySpawner : MonoBehaviour {
     public int waves;
     public float waitBetweenWaves;
     public float waitBetweenUnits;
-
+    public int increaseFactor;
+    public int startingNumber;
 	// Use this for initialization
 	void Start () {
         
@@ -16,12 +17,12 @@ public class EnemySpawner : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if(Input.GetKey(KeyCode.Alpha4))
+        if(Input.GetKeyDown(KeyCode.Alpha4))
             StartCoroutine(Spawn());
 	}
 
     IEnumerator Spawn(){
-        int nUnits = 10;
+        int nUnits = startingNumber;
         for (int i = 0; i < waves; i++){
             for (int j = 0; j < nUnits; j++)
             {
@@ -29,6 +30,7 @@ public class EnemySpawner : MonoBehaviour {
                 yield return new WaitForSeconds(waitBetweenUnits);
             }
             yield return new WaitForSeconds(waitBetweenWaves);
+            nUnits += increaseFactor;
         }
     }
 }

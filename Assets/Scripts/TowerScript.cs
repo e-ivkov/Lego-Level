@@ -8,6 +8,7 @@ public class TowerScript : MonoBehaviour
     public GameObject projectile;
     public float projectileSpeed;
     public float cooldown;
+    public bool clearVision;
 
     public float damageBonus = 0;
 
@@ -74,6 +75,8 @@ public class TowerScript : MonoBehaviour
 
     bool CheckVisible(GameObject checkObject)
     {
+        if (clearVision)
+            return true;
         RaycastHit hit;
         Physics.Raycast(new Ray(transform.position, checkObject.transform.position - transform.position), out hit);
         return (hit.collider.gameObject == checkObject);

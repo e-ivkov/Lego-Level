@@ -13,7 +13,8 @@ public class PowerConduitScript : MonoBehaviour
     private HashSet<GameObject> towers = new HashSet<GameObject>();
     private List<GameObject> powerLines = new List<GameObject>();
 
-    public void LinkTowers(){
+    public void LinkTowers()
+    {
         foreach (var tower in Physics.OverlapSphere(transform.position, visionR))
         {
             if (tower.CompareTag("tower") && !towers.Contains(tower.gameObject) && (towers.Count < maxTowers))
@@ -29,8 +30,9 @@ public class PowerConduitScript : MonoBehaviour
 
     public void UnlinkTowers()
     {
-        foreach(var tower in towers){
-            if(tower.activeSelf)
+        foreach (var tower in towers)
+        {
+            if (tower.activeSelf)
                 tower.GetComponent<TowerScript>().damageBonus -= damageBonus;
         }
         towers = new HashSet<GameObject>();

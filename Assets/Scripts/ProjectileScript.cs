@@ -25,6 +25,7 @@ public class ProjectileScript : MonoBehaviour
             {
                 Destroy(enemy.gameObject);
             }
+            GameObject.Find("Statistics").GetComponent<StatisticsScript>().projectileHit++;
             Destroy(gameObject);
         }
     }
@@ -32,6 +33,9 @@ public class ProjectileScript : MonoBehaviour
     private void Update()
     {
         if (Vector3.Distance(transform.position, startingPosition) > maxDistance)
+        {
+            GameObject.Find("Statistics").GetComponent<StatisticsScript>().projectileMiss++;
             Destroy(gameObject);
+        }
     }
 }

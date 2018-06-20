@@ -72,6 +72,11 @@ public class LevelBuilder : MonoBehaviour
             sceneObject.transform.position = new Vector3(item.Position.x * unit_x + translate.x, translate.y, item.Position.y * unit_y + translate.z);
             var shiftScaling = namedPrefabs[item.Name].shiftScaling;
             sceneObject.transform.Translate(shiftScaling.x * scaleFactor, shiftScaling.y * scaleFactor, shiftScaling.z * scaleFactor);
+            if(item.Name == "tower" || item.Name == "PowerConduit"){
+                var linker = sceneObject.GetComponent<TowerLinkerScript>();
+                linker.scaleFactor = scaleFactor;
+                linker.LinkTowers();
+            }
         }
 
 
