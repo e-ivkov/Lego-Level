@@ -11,7 +11,7 @@ public class LevelBuilder : MonoBehaviour
     public List<Structure> Structures;
     public List<ImportStructure> ImportStructures;
     public WebCamPhotoCamera webCamPhotoCamera;
-
+    public GameObject gameManager;
     public Texture2D LegoBlocks;
 
     [Serializable]
@@ -59,9 +59,16 @@ public class LevelBuilder : MonoBehaviour
 
         yield return new WaitUntil(() => rec.Completed);
         var recognizedItems = rec.Result;
-
+        var nTowersMax = gameManager.GetComponent<GameManager>().NumberOfTowers;
+        int nTowers = 0;
         foreach (var item in recognizedItems)
         {
+            if(item.Name == "tower"){
+                if (nTowers < nTowersMax)
+                    nTowers++;
+                else
+                    continue;
+            }
             var sceneObject = Instantiate(namedPrefabs[item.Name].gameObject);
             float scaleFactor = WebCamPhotoCamera.scale.y / (float)GridNumber.x;
             var scale = webCamPhotoCamera.GetScale();

@@ -7,6 +7,7 @@ public class EnemyScript : MonoBehaviour {
 
     public float Health;
     public float Speed;
+    public int Reward;
     public Transform Goal;
     private NavMeshAgent agent;
     public float pathUpdateDelay;

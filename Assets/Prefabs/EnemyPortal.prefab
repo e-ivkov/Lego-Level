@@ -152,6 +152,6 @@ MonoBehaviour:
   enemy: {fileID: 1936590942682770, guid: 7f7d129788bfb42eabdc5f4793e87fc7, type: 2}
   waves: 100
   waitBetweenWaves: 20
-  waitBetweenUnits: 3
-  increaseFactor: 1
+  waitBetweenUnits: 1
+  increaseFactor: 2
   startingNumber: 5
