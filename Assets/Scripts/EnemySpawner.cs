@@ -21,7 +21,7 @@ public class EnemySpawner : MonoBehaviour {
             StartCoroutine(Spawn());
 	}
 
-    IEnumerator Spawn(){
+    public IEnumerator Spawn(){
         int nUnits = startingNumber;
         for (int i = 0; i < waves; i++){
             for (int j = 0; j < nUnits; j++)

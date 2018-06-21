@@ -63,7 +63,7 @@ public class WebCamPhotoCamera : MonoBehaviour
         calculatedTexture = m2Texture;
     }
 
-    private IEnumerator StartBuildingLevel()
+    public IEnumerator StartBuildingLevel()
     {
         yield return CalculateTexture();
         levelBuilder.LegoBlocks = calculatedTexture;
@@ -138,7 +138,7 @@ public class WebCamPhotoCamera : MonoBehaviour
 
     }
 
-    void LoadPalette()
+    public void LoadPalette()
     {
         int x = (int)(topLeftPalette.transform.position.x / scale.x * webCamTexture.width);
         int y = (int)(bottomRight.transform.position.z / scale.y * webCamTexture.height);

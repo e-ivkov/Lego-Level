@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public GameObject nTowersText;
     public int towerCost;
     public GameObject towerCostText;
+    public GameObject webCam;
 
     public int Currency
     {
@@ -41,8 +42,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void AddTower(){
-        if(currency >= 5){
+    public void AddTower()
+    {
+        if (currency >= 5)
+        {
             NumberOfTowers++;
             Currency -= 5;
         }
@@ -56,9 +59,18 @@ public class GameManager : MonoBehaviour
         nTowersText.GetComponent<Text>().text = "Number of towers: " + numberOfTowers.ToString();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void StartGameButtonClick()
     {
+        StartCoroutine(StartGame());
+    }
 
+    IEnumerator StartGame()
+    {
+        webCam.GetComponent<WebCamPhotoCamera>().LoadPalette();
+        yield return webCam.GetComponent<WebCamPhotoCamera>().StartBuildingLevel();
+        foreach (var portal in GameObject.FindGameObjectsWithTag("portal"))
+        {
+            StartCoroutine(portal.GetComponent<EnemySpawner>().Spawn());
+        }
     }
 }

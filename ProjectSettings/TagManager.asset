@@ -9,6 +9,7 @@ TagManager:
   - tower
   - old
   - PowerConduit
+  - portal
   layers:
   - Default
   - TransparentFX
