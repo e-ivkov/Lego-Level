@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 114133701170261078}
   m_Layer: 0
   m_Name: EnemyPortal
-  m_TagString: Untagged
+  m_TagString: portal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -54,7 +54,7 @@ Transform:
   m_GameObject: {fileID: 1457536908960206}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 6, y: 6, z: 6}
+  m_LocalScale: {x: 1.5, y: 6, z: 6}
   m_Children: []
   m_Father: {fileID: 4869754291023312}
   m_RootOrder: 0
@@ -66,7 +66,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1625496408349938}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 21.00876, y: 0.01, z: 31.86652}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4627276681469980}
@@ -153,3 +153,5 @@ MonoBehaviour:
   waves: 100
   waitBetweenWaves: 20
   waitBetweenUnits: 1
+  increaseFactor: 2
+  startingNumber: 5

@@ -8,6 +8,8 @@ TagManager:
   - enemy
   - tower
   - old
+  - PowerConduit
+  - portal
   layers:
   - Default
   - TransparentFX

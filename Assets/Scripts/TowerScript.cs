@@ -8,6 +8,9 @@ public class TowerScript : MonoBehaviour
     public GameObject projectile;
     public float projectileSpeed;
     public float cooldown;
+    public bool clearVision;
+
+    public float damageBonus = 0;
 
     GameObject target;
     bool hasTarget = false;
@@ -49,6 +52,7 @@ public class TowerScript : MonoBehaviour
         var c = beta > 0 ? Quaternion.Euler(0, beta, 0) * (a.normalized * -1) : (a.normalized * -1);
         var firedProj = Instantiate(projectile, transform.position, Quaternion.identity);
         firedProj.GetComponent<ProjectileScript>().maxDistance = visionR;
+        firedProj.GetComponent<ProjectileScript>().damage += damageBonus;
         //Debug.Log(b);
         firedProj.GetComponent<Rigidbody>().velocity = c.normalized * projectileSpeed;
         yield return new WaitForSeconds(cooldown);
@@ -71,6 +75,8 @@ public class TowerScript : MonoBehaviour
 
     bool CheckVisible(GameObject checkObject)
     {
+        if (clearVision)
+            return true;
         RaycastHit hit;
         Physics.Raycast(new Ray(transform.position, checkObject.transform.position - transform.position), out hit);
         return (hit.collider.gameObject == checkObject);

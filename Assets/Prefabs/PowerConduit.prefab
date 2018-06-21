@@ -39,9 +39,11 @@ GameObject:
   - component: {fileID: 4163013172858378}
   - component: {fileID: 65133705132048430}
   - component: {fileID: 208236226572271912}
+  - component: {fileID: 114339482527245860}
+  - component: {fileID: 114981483250350532}
   m_Layer: 0
   m_Name: PowerConduit
-  m_TagString: tower
+  m_TagString: PowerConduit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -211,6 +213,36 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &114339482527245860
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1242505721244612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 412a454629dec413fb2e0bcebf852fd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  visionR: 10
+  maxTowers: 4
+  damageBonus: 10
+  powerLine: {fileID: 1423394730665060, guid: fee778515922445e19ce78e1a241d24b, type: 2}
+--- !u!114 &114981483250350532
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1242505721244612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e2c4bd6ffe7b428d84b46c19906a146, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  visionRFactor: 3
+  wallBlock: {fileID: 1160830198687082, guid: 73a9f7a4eccb547f19696fdda9058f19, type: 2}
+  scaleFactor: 0
+  active: 0
 --- !u!135 &135754072803765068
 SphereCollider:
   m_ObjectHideFlags: 1

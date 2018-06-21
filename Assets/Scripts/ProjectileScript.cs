@@ -8,11 +8,14 @@ public class ProjectileScript : MonoBehaviour
     [HideInInspector]
     public float maxDistance;
 
+    private GameObject gameManager;
+
     Vector3 startingPosition;
 
     private void Start()
     {
         startingPosition = transform.position;
+        gameManager = GameObject.Find("GameManager");
     }
 
     private void OnTriggerEnter(Collider other)
@@ -23,8 +26,10 @@ public class ProjectileScript : MonoBehaviour
             enemy.Health -= damage;
             if (enemy.Health <= 0)
             {
+                gameManager.GetComponent<GameManager>().Currency += enemy.Reward;
                 Destroy(enemy.gameObject);
             }
+            GameObject.Find("Statistics").GetComponent<StatisticsScript>().projectileHit++;
             Destroy(gameObject);
         }
     }
@@ -32,6 +37,9 @@ public class ProjectileScript : MonoBehaviour
     private void Update()
     {
         if (Vector3.Distance(transform.position, startingPosition) > maxDistance)
+        {
+            GameObject.Find("Statistics").GetComponent<StatisticsScript>().projectileMiss++;
             Destroy(gameObject);
+        }
     }
 }
