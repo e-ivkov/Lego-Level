@@ -13,6 +13,9 @@ public class PowerConduitScript : MonoBehaviour
     private HashSet<GameObject> towers = new HashSet<GameObject>();
     private List<GameObject> powerLines = new List<GameObject>();
 
+    /// <summary>
+    /// Creates a "power link" to the towers giving them the additional power
+    /// </summary>
     public void LinkTowers()
     {
         foreach (var tower in Physics.OverlapSphere(transform.position, visionR))

@@ -48,9 +48,9 @@ public class ThreadedRecognizer
         System.ComponentModel.DoWorkEventArgs e)
     {
         IRecognizer rec = (IRecognizer)e.Argument;
-        // Return the value through the Result property.  
         Color[,] pixels = new Color[width, height];
-        for (int i = 0; i < width; i++)
+        //Convert array of pixels from one dimesnional to two dimensional based on height and width
+        for (int i = 0; i < width; i++) 
         {
             for (int j = 0; j < height; j++)
             {
@@ -58,6 +58,7 @@ public class ThreadedRecognizer
             }
 
         }
+        // Return the value through the Result property.  
         e.Result = rec.Recognize(pixels);
     }
 

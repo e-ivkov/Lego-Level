@@ -13,6 +13,9 @@ public class TowerLinkerScript : MonoBehaviour
     public bool active;
     List<GameObject> wallLink = new List<GameObject>();
 
+    /// <summary>
+    /// Connect this tower to the towers in the vicinity with walls
+    /// </summary>
     public void LinkTowers()
     {
         if (!active)

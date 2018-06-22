@@ -22,6 +22,7 @@ public class EnemyScript : MonoBehaviour {
         StartCoroutine(DoUpdatePath());
 	}
 
+    //Updates path in a given period to improve performance of the game that has hordes of enemies
     IEnumerator DoUpdatePath(){
         while (updatePath)
         {
@@ -33,11 +34,11 @@ public class EnemyScript : MonoBehaviour {
 
     }
 
-    /*private void Update()
-    {
-        transform.position = agent.nextPosition;
-    }*/
-
+    /// <summary>
+    /// Gets the approximate position of the unit after time.
+    /// </summary>
+    /// <returns>The position after time.</returns>
+    /// <param name="seconds">time in seconds</param>
     public Vector3 GetPositionAfterTime(float seconds){
         return agent.velocity*seconds + transform.position;
     }
@@ -46,7 +47,6 @@ public class EnemyScript : MonoBehaviour {
     {
         if (other.CompareTag("gate"))
         {
-            Debug.Log(other.name);
             other.GetComponent<GateScript>().DefensePoints--;
             Destroy(gameObject);
         }

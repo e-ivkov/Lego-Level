@@ -12,7 +12,7 @@ public class SkewedGridRecognizer : GridRecognizer
     {
         intersectionPoints = new Vector2[GridNumber.x, GridNumber.y];
         Corners = corners;
-        for (int i = 0; i < GridNumber.x; i++)
+        for (int i = 0; i < GridNumber.x; i++)  //generates polygons according to the given corner positions
         {
             for (int j = 0; j < GridNumber.y; j++)
             {
@@ -30,7 +30,7 @@ public class SkewedGridRecognizer : GridRecognizer
     public override Vector2Int GetBlockIndexes(Vector2Int pixelIndexes, Color[,] image)
     {
         
-        for (int i = 0; i < GridNumber.x - 1; i++)
+        for (int i = 0; i < GridNumber.x - 1; i++)  //looks for the polygon that has this pixel
         {
             for (int j = 0; j < GridNumber.y - 1; j++)
             {

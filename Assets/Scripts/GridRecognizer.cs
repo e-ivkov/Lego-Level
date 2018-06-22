@@ -47,11 +47,22 @@ public class GridRecognizer : IRecognizer
         return blocks;
     }
 
+    /// <summary>
+    /// Gets the number of pixels per block.
+    /// </summary>
+    /// <returns>number of pixels for the given block</returns>
+    /// <param name="image">Image.</param>
     public virtual float GetNPixelsPerBlock(Color[,] image){
         float nPixels = ((float)image.GetLength(0) / (float)GridNumber.x) * ((float)image.GetLength(1) / (float)GridNumber.y);
         return nPixels;
     }
 
+    /// <summary>
+    /// Gets the indexes of the block that contains this pixel
+    /// </summary>
+    /// <returns>The block indexes</returns>
+    /// <param name="pixelIndexes">Position of the pixel</param>
+    /// <param name="image">Image.</param>
     public virtual Vector2Int GetBlockIndexes(Vector2Int pixelIndexes, Color[,] image){
         int x = pixelIndexes.x / (int)Mathf.Ceil((float)image.GetLength(0) / (float)GridNumber.x);
         int y = pixelIndexes.y / (int)Mathf.Ceil((float)image.GetLength(1) / (float)GridNumber.y);

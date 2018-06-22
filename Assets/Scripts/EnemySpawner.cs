@@ -21,6 +21,10 @@ public class EnemySpawner : MonoBehaviour {
             StartCoroutine(Spawn());
 	}
 
+    /// <summary>
+    /// Spawns enemies in waves with the given number of units, time to wait between waves and time to wait between units
+    /// </summary>
+    /// <returns>The spawn.</returns>
     public IEnumerator Spawn(){
         int nUnits = startingNumber;
         for (int i = 0; i < waves; i++){

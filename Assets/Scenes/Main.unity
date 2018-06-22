@@ -606,25 +606,9 @@ MonoBehaviour:
   webCamPhotoCamera: {fileID: 779918919}
   gameManager: {fileID: 1278884206}
   LegoBlocks: {fileID: 0}
-  ColorBlockNames:
-  - Color: {r: 0, g: 0, b: 0, a: 0}
-    Name: black
-  - Color: {r: 1, g: 1, b: 1, a: 0}
-    Name: white
-  - Color: {r: 0, g: 0, b: 1, a: 0}
-    Name: blue
+  ImportColorPaletteNames:
   - Color: {r: 1, g: 0, b: 0, a: 0}
     Name: red
-  - Color: {r: 1, g: 1, b: 0, a: 0}
-    Name: yellow
-  - Color: {r: 1, g: 0, b: 1, a: 0}
-    Name: pink
-  - Color: {r: 0.29411766, g: 0.6117647, b: 0.5019608, a: 0}
-    Name: green
-  - Color: {r: 0.49803922, g: 1, b: 0, a: 0}
-    Name: lime green
-  - Color: {r: 0.7793102, g: 0.49803922, b: 1, a: 0}
-    Name: purple
   ColorPaletteNames:
   - Color: {r: 0.4654279, g: 0.46437857, b: 0.4713014, a: 0}
     Name: gray no shadow
@@ -834,25 +818,7 @@ MonoBehaviour:
   webCamPhotoCamera: {fileID: 779918919}
   gameManager: {fileID: 1278884206}
   LegoBlocks: {fileID: 0}
-  ColorBlockNames:
-  - Color: {r: 0, g: 0, b: 0, a: 0}
-    Name: black
-  - Color: {r: 1, g: 1, b: 1, a: 0}
-    Name: white
-  - Color: {r: 0, g: 0, b: 1, a: 0}
-    Name: blue
-  - Color: {r: 1, g: 0, b: 0, a: 0}
-    Name: red
-  - Color: {r: 1, g: 1, b: 0, a: 0}
-    Name: yellow
-  - Color: {r: 1, g: 0, b: 1, a: 0}
-    Name: pink
-  - Color: {r: 0.29411766, g: 0.6117647, b: 0.5019608, a: 0}
-    Name: green
-  - Color: {r: 0.49803922, g: 1, b: 0, a: 0}
-    Name: lime green
-  - Color: {r: 0.7793102, g: 0.49803922, b: 1, a: 0}
-    Name: purple
+  ImportColorPaletteNames: []
   ColorPaletteNames:
   - Color: {r: 0.16601478, g: 0.1656895, b: 0.16902144, a: 0}
     Name: black

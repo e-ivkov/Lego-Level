@@ -38,6 +38,10 @@ public class WebCamPhotoCamera : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Some preprocessing of the raw photo, cutting and rotating it
+    /// </summary>
+    /// <returns>The texture.</returns>
     public IEnumerator CalculateTexture()
     {
         int x = (int)(topLeft.transform.position.x / scale.x * webCamTexture.width);
@@ -55,7 +59,7 @@ public class WebCamPhotoCamera : MonoBehaviour
         var startTime = Time.realtimeSinceStartup;
         m1Texture.SetPixels(pixels);
         m1Texture.Apply();
-        Debug.Log(Time.realtimeSinceStartup - startTime);
+        //Debug.Log(Time.realtimeSinceStartup - startTime);
         Color[] c = m1Texture.GetPixels(x, y, width - 1, height - 1);
         Texture2D m2Texture = new Texture2D(width - 1, height - 1);
         m2Texture.SetPixels(c);
@@ -63,6 +67,10 @@ public class WebCamPhotoCamera : MonoBehaviour
         calculatedTexture = m2Texture;
     }
 
+    /// <summary>
+    /// Starts building the level.
+    /// </summary>
+    /// <returns>The building level.</returns>
     public IEnumerator StartBuildingLevel()
     {
         yield return CalculateTexture();
@@ -72,6 +80,10 @@ public class WebCamPhotoCamera : MonoBehaviour
         towerBuilder.StartCoroutine(towerBuilder.BuildTowers());
     }
 
+    /// <summary>
+    /// Gets the scale.
+    /// </summary>
+    /// <returns>Pixel coordinates and width and hieght of the part of the picture that should be recognized</returns>
     public int[] GetScale(){
         int x = (int)(topLeft.transform.position.x / scale.x * webCamTexture.width);
         int y = (int)(bottomRight.transform.position.z / scale.y * webCamTexture.height);
@@ -93,9 +105,8 @@ public class WebCamPhotoCamera : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
+            //draws a grid according to the current topLeft and bottomRight GameObjects
             photo = new Texture2D(webCamTexture.width, webCamTexture.height);
-            //var pixels = webCamTexture.GetPixels();
-            //System.Array.Reverse(pixels);
             for (int i = 0; i < webCamTexture.width; i++)
                 for (int j = 0; j < webCamTexture.height; j++)
                     photo.SetPixel(i, j, Color.clear);
@@ -120,7 +131,7 @@ public class WebCamPhotoCamera : MonoBehaviour
                     }
                 }
             }
-            photo.SetPixel(0, 0, Color.red);
+            photo.SetPixel(0, 0, Color.red); //helps to identify the orientation of the image
             Color[] colors = photo.GetPixels();
             System.Array.Reverse(colors);
             photo.SetPixels(colors);
@@ -138,6 +149,10 @@ public class WebCamPhotoCamera : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Loads the palette of colors, that is positioned in the right bottom corner and.
+    /// The size of the palette is controled by the bottomRight and topLeftPalette GameObjects
+    /// </summary>
     public void LoadPalette()
     {
         int x = (int)(topLeftPalette.transform.position.x / scale.x * webCamTexture.width);
@@ -174,9 +189,12 @@ public class WebCamPhotoCamera : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Takes the photo with the webCam.
+    /// Mainly used for debugging.
+    /// </summary>
     void TakePhoto()
     {
-
         Texture2D photo = new Texture2D(webCamTexture.width, webCamTexture.height);
         photo.SetPixels(webCamTexture.GetPixels());
         photo.Apply();

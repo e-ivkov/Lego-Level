@@ -64,6 +64,11 @@ public class GameManager : MonoBehaviour
         StartCoroutine(StartGame());
     }
 
+    /// <summary>
+    /// Starts the game.
+    /// Loads palette, builds level and starts all the portals.
+    /// </summary>
+    /// <returns>The game.</returns>
     IEnumerator StartGame()
     {
         webCam.GetComponent<WebCamPhotoCamera>().LoadPalette();

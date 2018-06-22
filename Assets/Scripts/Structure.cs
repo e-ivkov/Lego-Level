@@ -19,6 +19,13 @@ public struct Structure
         Name = name;
     }
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="T:Structure"/> struct out of the given image by treating each pixel as a separate block
+    /// </summary>
+    /// <param name="priority">Priority.</param>
+    /// <param name="blocks">Blocks.</param>
+    /// <param name="colorNames">Color names.</param>
+    /// <param name="name">Name.</param>
     public Structure(int priority, Texture2D blocks, Dictionary<Color, string> colorNames, string name)
     {
         Priority = priority;
@@ -27,7 +34,7 @@ public struct Structure
         {
             for (int j = 0; j < blocks.height; j++)
             {
-                Debug.Log(blocks.GetPixel(i, j));
+                //Debug.Log(blocks.GetPixel(i, j));
                 if (blocks.GetPixel(i, j) != Color.white)
                 {
                     var c = blocks.GetPixel(i, j);

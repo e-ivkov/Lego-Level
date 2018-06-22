@@ -29,8 +29,8 @@ public class LevelBuilder : MonoBehaviour
         public Vector3 shiftScaling;
     }
 
-    public List<ColoredBlock> ColorBlockNames; // import structures
-    public List<ColoredBlock> ColorPaletteNames; // recognized palette
+    public List<ColoredBlock> ImportColorPaletteNames; // colors of import structures and their coresponding names
+    public List<ColoredBlock> ColorPaletteNames; // recognized palette colors - recognized in runtime
 
     public List<NamedPrefab> NamedPrefabs;
 
@@ -107,13 +107,16 @@ public class LevelBuilder : MonoBehaviour
         DoImportStructures();
     }
 
+    /// <summary>
+    /// Converts import structure pics into proper structure class with array of blocks and their positions
+    /// </summary>
     void DoImportStructures()
     {
         var colorNames = new Dictionary<Color, String>();
-        foreach (ColoredBlock coloredBlock in ColorBlockNames)
+        foreach (ColoredBlock coloredBlock in ImportColorPaletteNames)
         {
             colorNames.Add(coloredBlock.Color, coloredBlock.Name);
-            Debug.Log(coloredBlock.Color);
+            //Debug.Log(coloredBlock.Color);
         }
         foreach (var imStruct in ImportStructures)
         {

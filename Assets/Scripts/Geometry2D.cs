@@ -33,6 +33,13 @@ public static class Geometry2D
         );
     }
 
+    /// <summary>
+    /// Draws the line on tex from p1 to p2 with the col
+    /// </summary>
+    /// <param name="tex">Tex.</param>
+    /// <param name="p1">P1.</param>
+    /// <param name="p2">P2.</param>
+    /// <param name="col">Col.</param>
     public static void DrawLine(this Texture2D tex, Vector2 p1, Vector2 p2, Color col)
     {
         Vector2 t = p1;
@@ -47,6 +54,12 @@ public static class Geometry2D
         }
     }
 
+    /// <summary>
+    /// Checks if point is inside the polygon
+    /// </summary>
+    /// <returns><c>true</c>, if point is inside <c>false</c> otherwise.</returns>
+    /// <param name="point">Point.</param>
+    /// <param name="polygon">Polygon verticies in clockwise order</param>
     public static bool IsPointInPolygon(Vector2 point, Vector2[] polygon)
     {
         int polygonLength = polygon.Length, i = 0;
