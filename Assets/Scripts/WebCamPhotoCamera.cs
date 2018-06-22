@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
+//Actually this script is a bit of a mess
+//TODO: Restructure the script
 public class WebCamPhotoCamera : MonoBehaviour
 {
 
@@ -17,6 +19,8 @@ public class WebCamPhotoCamera : MonoBehaviour
     Texture2D photo;
     public Vector2[] Corners { get; set; }
     public Texture2D calculatedTexture;
+
+    //responsible for the scaling of game objects positions to the pixel positions on the photo
     public static Vector2 scale = new Vector2(80, 60);
 
     void Start()
@@ -52,7 +56,7 @@ public class WebCamPhotoCamera : MonoBehaviour
         var pixels = webCamTexture.GetPixels();
         var backgroundWorker = new System.ComponentModel.BackgroundWorker();
         var sorted = false;
-        backgroundWorker.DoWork += (sender, e) => System.Array.Reverse(pixels); //TODO: improve performance here (probably through threads and making it into coroutine)
+        backgroundWorker.DoWork += (sender, e) => System.Array.Reverse(pixels); //takes a lot of time so had to be done asynchronously
         backgroundWorker.RunWorkerCompleted += (sender, e) => sorted = true;
         backgroundWorker.RunWorkerAsync();
         yield return new WaitUntil(() => sorted);
@@ -60,7 +64,7 @@ public class WebCamPhotoCamera : MonoBehaviour
         m1Texture.SetPixels(pixels);
         m1Texture.Apply();
         //Debug.Log(Time.realtimeSinceStartup - startTime);
-        Color[] c = m1Texture.GetPixels(x, y, width - 1, height - 1);
+        Color[] c = m1Texture.GetPixels(x, y, width - 1, height - 1); //has to be one pixel less or there might be boundary mistakes
         Texture2D m2Texture = new Texture2D(width - 1, height - 1);
         m2Texture.SetPixels(c);
         m2Texture.Apply();
@@ -166,7 +170,7 @@ public class WebCamPhotoCamera : MonoBehaviour
         m1Texture.SetPixels(pixels);
         m1Texture.Apply();
         Vector4[] averageColors = new Vector4[palette.Count];
-
+        //calculating average colors for palette blocks
         for (int i = 0; i < width - 1; i++)
         {
             for (int j = 0; j < height - 1; j++)

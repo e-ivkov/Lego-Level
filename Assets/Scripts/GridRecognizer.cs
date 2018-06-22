@@ -22,6 +22,7 @@ public class GridRecognizer : IRecognizer
         Vector4[,] averageColors = new Vector4[GridNumber.x, GridNumber.y];
         int width = image.GetLength(0); // NOTE: not sure if the order of dimensions is right
         int height = image.GetLength(1);
+        //calculating average colors
         for (int i = 0; i < width; i++)
         {
             for (int j = 0; j < height; j++)
@@ -32,6 +33,7 @@ public class GridRecognizer : IRecognizer
                     averageColors[blockIndexes.x, blockIndexes.y] += (Vector4)image[i, j];
             }
         }
+        //matching average colors with the closest from the palette
         var blocks = new List<RecognizedItem>();
         for (int i = 0; i < averageColors.GetLength(0); i++)
         {
